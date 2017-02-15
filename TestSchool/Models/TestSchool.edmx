@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="testbaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="Classes_Id" />
+          </Key>
+          <Property Name="Classes_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="100" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Start_Date" Type="datetime" />
+          <Property Name="End_Date" Type="datetime" />
+          <Property Name="Create_Date" Type="datetime" />
+          <Property Name="Update_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Student_Id" />
+          </Key>
+          <Property Name="Student_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="First_Name" Type="varchar" MaxLength="100" />
+          <Property Name="Last_Name" Type="varchar" MaxLength="100" />
+          <Property Name="Date_of_birth" Type="date" />
+          <Property Name="Phone_Number" Type="varchar" MaxLength="10" />
+          <Property Name="Adress" Type="varchar" MaxLength="100" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Create_Date" Type="datetime" />
+          <Property Name="Update_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Students_Classes">
+          <Key>
+            <PropertyRef Name="Student_Id" />
+            <PropertyRef Name="Classes_Id" />
+          </Key>
+          <Property Name="Student_Id" Type="int" Nullable="false" />
+          <Property Name="Classes_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="Teacher_Id" />
+          </Key>
+          <Property Name="Teacher_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="First_Name" Type="varchar" MaxLength="100" />
+          <Property Name="Last_Name" Type="varchar" MaxLength="100" />
+          <Property Name="Date_of_birth" Type="date" />
+          <Property Name="Phone_Number" Type="varchar" MaxLength="15" />
+          <Property Name="Picture" Type="varbinary(max)" />
+          <Property Name="Start_Date" Type="datetime" />
+          <Property Name="End_Date" Type="datetime" />
+          <Property Name="Create_Date" Type="datetime" />
+          <Property Name="Update_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Teachers_Classes">
+          <Key>
+            <PropertyRef Name="Teacher_Id" />
+            <PropertyRef Name="Classes_Id" />
+          </Key>
+          <Property Name="Teacher_Id" Type="int" Nullable="false" />
+          <Property Name="Classes_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_Classes_SC">
+          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="Students_Classes" Type="Self.Students_Classes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="Classes_Id" />
+            </Principal>
+            <Dependent Role="Students_Classes">
+              <PropertyRef Name="Classes_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Classes_TC">
+          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="Teachers_Classes" Type="Self.Teachers_Classes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="Classes_Id" />
+            </Principal>
+            <Dependent Role="Teachers_Classes">
+              <PropertyRef Name="Classes_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Student_SC">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Students_Classes" Type="Self.Students_Classes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Student_Id" />
+            </Principal>
+            <Dependent Role="Students_Classes">
+              <PropertyRef Name="Student_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Teacher_TC">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Teachers_Classes" Type="Self.Teachers_Classes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="Teacher_Id" />
+            </Principal>
+            <Dependent Role="Teachers_Classes">
+              <PropertyRef Name="Teacher_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="testbaseModelStoreContainer">
+          <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students_Classes" EntityType="Self.Students_Classes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teachers_Classes" EntityType="Self.Teachers_Classes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_Classes_SC" Association="Self.fk_Classes_SC">
+            <End Role="Class" EntitySet="Class" />
+            <End Role="Students_Classes" EntitySet="Students_Classes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Classes_TC" Association="Self.fk_Classes_TC">
+            <End Role="Class" EntitySet="Class" />
+            <End Role="Teachers_Classes" EntitySet="Teachers_Classes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Student_SC" Association="Self.fk_Student_SC">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Students_Classes" EntitySet="Students_Classes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Teacher_TC" Association="Self.fk_Teacher_TC">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Teachers_Classes" EntitySet="Teachers_Classes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="testbaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="Classes_Id" />
+          </Key>
+          <Property Name="Classes_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Start_Date" Type="DateTime" Precision="3" />
+          <Property Name="End_Date" Type="DateTime" Precision="3" />
+          <Property Name="Create_Date" Type="DateTime" Precision="3" />
+          <Property Name="Update_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Student" Relationship="Self.Students_Classes" FromRole="Class" ToRole="Student" />
+          <NavigationProperty Name="Teacher" Relationship="Self.Teachers_Classes" FromRole="Class" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Student_Id" />
+          </Key>
+          <Property Name="Student_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="First_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Date_of_birth" Type="DateTime" Precision="0" />
+          <Property Name="Phone_Number" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Adress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Create_Date" Type="DateTime" Precision="3" />
+          <Property Name="Update_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Class" Relationship="Self.Students_Classes" FromRole="Student" ToRole="Class" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="Teacher_Id" />
+          </Key>
+          <Property Name="Teacher_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="First_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Date_of_birth" Type="DateTime" Precision="0" />
+          <Property Name="Phone_Number" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Start_Date" Type="DateTime" Precision="3" />
+          <Property Name="End_Date" Type="DateTime" Precision="3" />
+          <Property Name="Create_Date" Type="DateTime" Precision="3" />
+          <Property Name="Update_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Class" Relationship="Self.Teachers_Classes" FromRole="Teacher" ToRole="Class" />
+        </EntityType>
+        <Association Name="Students_Classes">
+          <End Role="Class" Type="Self.Class" Multiplicity="*" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+        </Association>
+        <Association Name="Teachers_Classes">
+          <End Role="Class" Type="Self.Class" Multiplicity="*" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="testbaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Class" EntityType="Self.Class" />
+          <EntitySet Name="Student" EntityType="Self.Student" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" />
+          <AssociationSet Name="Students_Classes" Association="Self.Students_Classes">
+            <End Role="Class" EntitySet="Class" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="Teachers_Classes" Association="Self.Teachers_Classes">
+            <End Role="Class" EntitySet="Class" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="testbaseModelStoreContainer" CdmEntityContainer="testbaseEntities">
+          <EntitySetMapping Name="Class">
+            <EntityTypeMapping TypeName="testbaseModel.Class">
+              <MappingFragment StoreEntitySet="Class">
+                <ScalarProperty Name="Classes_Id" ColumnName="Classes_Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
+                <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Update_Date" ColumnName="Update_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student">
+            <EntityTypeMapping TypeName="testbaseModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="Student_Id" ColumnName="Student_Id" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Date_of_birth" ColumnName="Date_of_birth" />
+                <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Update_Date" ColumnName="Update_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teacher">
+            <EntityTypeMapping TypeName="testbaseModel.Teacher">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="Teacher_Id" ColumnName="Teacher_Id" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Date_of_birth" ColumnName="Date_of_birth" />
+                <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
+                <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Update_Date" ColumnName="Update_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Students_Classes" TypeName="testbaseModel.Students_Classes" StoreEntitySet="Students_Classes">
+            <EndProperty Name="Class">
+              <ScalarProperty Name="Classes_Id" ColumnName="Classes_Id" />
+            </EndProperty>
+            <EndProperty Name="Student">
+              <ScalarProperty Name="Student_Id" ColumnName="Student_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Teachers_Classes" TypeName="testbaseModel.Teachers_Classes" StoreEntitySet="Teachers_Classes">
+            <EndProperty Name="Class">
+              <ScalarProperty Name="Classes_Id" ColumnName="Classes_Id" />
+            </EndProperty>
+            <EndProperty Name="Teacher">
+              <ScalarProperty Name="Teacher_Id" ColumnName="Teacher_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

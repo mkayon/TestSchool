@@ -1,0 +1,106 @@
+﻿@model TestSchool.Models.Class
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Class</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Start_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.End_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.End_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Create_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Create_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Update_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Update_Date)
+        </dd>
+
+    </dl>
+</div>
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <table>
+            <tr>
+                @{
+                    int cnt = 0;
+                    List<TestSchool.ViewModels.AssignedStudentData> students = ViewBag.students;
+
+                    foreach (var student in students)
+                    {
+                        if (cnt++ % 3 == 0)
+                        {
+
+                            @:</tr><tr>
+                                }
+
+                        @:<td>
+                            <input type="checkbox"
+                                   name="selectedCourses"
+                                   value="@student.StudentID"
+                                   @(Html.Raw(student.Assigned ? "checked=\"checked\"" : "")) disabled/>
+                                        @student.StudentID @: @student.StudentFirstName
+
+
+                                        @:</td>
+                            }
+                    @:</tr>
+                }
+            </table>
+        </div>
+    </div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Classes_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

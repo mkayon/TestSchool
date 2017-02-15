@@ -1,0 +1,69 @@
+﻿@model IEnumerable<TestSchool.Models.Class>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Start_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.End_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Create_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Update_Date)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Start_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.End_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Create_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Update_Date)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Classes_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Classes_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Classes_Id })
+        </td>
+    </tr>
+}
+
+</table>

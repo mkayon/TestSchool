@@ -1,0 +1,134 @@
+﻿@model TestSchool.Models.Teacher
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div class="main">
+    <h4>Teacher</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.First_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.First_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Last_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Last_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_of_birth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_of_birth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone_Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone_Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Picture)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Picture)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Start_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.End_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.End_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Create_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Create_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Update_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Update_Date)
+        </dd>
+
+    </dl>
+    <table class="table class-table">
+        <tr>
+            <th>
+                <p>Class</p>
+            </th>
+            <th>
+                <p>Class Name</p>
+            </th>
+        </tr>
+
+        @foreach (var item in Model.Classes)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Classes_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Active)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Start_Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.End_Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Create_Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Update_Date)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Classes_Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Classes_Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Classes_Id })
+                    </td>*@
+            </tr>
+        }
+
+    </table>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Teacher_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
